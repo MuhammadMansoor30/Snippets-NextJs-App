@@ -1,0 +1,22 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Snippet{
+  id Int @id @default(autoincrement())
+  title String
+  code String
+}
+
+
+// NOTES (SEC 2):
+// Prisma is a library used to help us access the local sqlite database so that we can store our app data.
+// Prisma also helps us in managing our locally installed sqlite database for our project
