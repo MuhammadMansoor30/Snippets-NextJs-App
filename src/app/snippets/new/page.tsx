@@ -34,7 +34,7 @@ export default function SnippetsCreatePage() {
     );
 }
   
-// NOTES (SEC 2):
+// NOTES (SEC 2 + 3):
 // We will use Next js server actions to add data to our database.
 // For this we will create an async function and by using the directive if 'use server' tells next js that it is a server action.
 // We can use the formData object to get all the elements and data out of the form we have created.
