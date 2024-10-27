@@ -1,6 +1,7 @@
 import { db } from "@/db";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import * as actions from "@/actions/index";
 
 interface snippetsShowPageProrps{
     params: {
@@ -19,13 +20,17 @@ export default async function SnippetShowPage(props: snippetsShowPageProrps){
         return notFound();
     }
 
+    const deleteSnippet = actions.deleteSnippet.bind(null, snippet.id);
+
     return (
         <>
         <div className="flex items-center justify-between m-4">
             <div className="text-xl bold">{snippet.title}</div>
             <div className="flex gap-2">
                 <Link href={`${snippet.id}/edit`} className="border-2 rounded p-2">Edit</Link>
-                <button className="border-2 rounded p-2">Delete</button>
+                <form action={deleteSnippet}>
+                    <button type="submit" className="border-2 rounded p-2">Delete</button>
+                </form>
             </div>
         </div>
         <pre className="p-3 border rounded bg-gray-200 border-grey-200">
@@ -44,4 +49,7 @@ export default async function SnippetShowPage(props: snippetsShowPageProrps){
 // As there name suggests these files do the same thing as there name is.
 // By creating a not-found.tsx file if page doesnt exists then it calls the nearest not-found.tsx page and displays it.
 // If the not-found.text file is not present then it will call the default not-found file. 
-// the code tag inside of pre tag is used to write code elements to the pgae so that it looks different from other content on the page. The pre tage formats the code into the code like structure
+// the code tag inside of pre tag is used to write code elements to the pgae so that it looks different from other content on the page. The pre tage formats the code into the code like structure.
+
+// (Sec 4):
+// Deleting the snippet using the server action defined in index.ts file. More info in snipper-edit-form.tsx file.
