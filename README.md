@@ -1,5 +1,10 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+A Simple NextJs application created for Purpose of learning and practicing the Nextjs.
+Snippets application where users can Create, Read, Update and Delete code Snippets.
+Learned about Server Action, Server Side Rendering, Client and Server Components, Caching System, UseFormStateHooks.
+More info is provided at the end of each file for all the new things learned and their concepts.
+
 ## Getting Started
 
 First, run the development server:
