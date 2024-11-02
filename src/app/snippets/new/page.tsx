@@ -28,7 +28,7 @@ export default function SnippetsCreatePage() {
     );
 }
 
-// NOTES (SEC 4):
+// NOTES (SEC 4 + 5):
 // Now we will create useFormState hook to modify our create page so that we can also handle errors if there are any.
 // For this we will make our server component into client component and move our server action to actions folder.
 // Then by uisng the useFormSate hook we can make changes.

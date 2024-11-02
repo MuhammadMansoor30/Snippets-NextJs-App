@@ -40,8 +40,19 @@ export default async function SnippetShowPage(props: snippetsShowPageProrps){
     );
 };
 
+export async function generateStaticParams(){
+    const snippets = await db.snippet.findMany();
+
+    return snippets.map((snippet) => {
+        return {
+            id: snippet.id.toString(),   
+            // Converting it to string as params by deafult should be strings and id is number in our case
+        }
+    });
+}
+
 // NOTES(SEC 3):
-// If we have dynamic routes with params that change everytime then we can create  folder like [id] this.
+// If we have dynamic routes with params that change everytime then we can create folder like [id] this.
 // Here [] brackets means that it could contain different param values and 'id' represents the key of that value that appears in url or params object.
 // By deafult any props we pass to nextjs are treated as strings so we have to give appropriate type to the interface and then parse it down if we expect and integer or double.
 // notFound function found in the next/navigation folder gives us a 404 not found page so that we can direct user that the desired page he expects is not available. 
@@ -51,5 +62,10 @@ export default async function SnippetShowPage(props: snippetsShowPageProrps){
 // If the not-found.text file is not present then it will call the default not-found file. 
 // the code tag inside of pre tag is used to write code elements to the pgae so that it looks different from other content on the page. The pre tage formats the code into the code like structure.
 
-// (Sec 4):
+// (SEC 4):
 // Deleting the snippet using the server action defined in index.ts file. More info in snipper-edit-form.tsx file.
+
+// (SEC 6):
+// Craeting an async function for generating static params so that we can alloww caching system of next to work and make our dynamic page as static page.
+// For this we will get all the data from db and then map that data based on our param like in our case we have id so we will create an object and map the id of our db objects to the id defined.
+// Based on that we ids the next will cached the pages before hand.

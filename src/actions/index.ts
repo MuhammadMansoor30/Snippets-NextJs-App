@@ -1,6 +1,7 @@
 'use server';
 import { db } from "@/db";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export async function createSnippet(formState: {message: string}, formData: FormData){
     // Adding in the formState object here to tell the server about the formState and change it and then pass it to the client comp
@@ -38,6 +39,7 @@ export async function createSnippet(formState: {message: string}, formData: Form
             }
         }
     }
+    revalidatePath('/');  // Used for disabling caching on Nextjs and using onDemand caching More in main page.tsx file 
     redirect('/');
 }
 
@@ -47,19 +49,20 @@ export async function editSnippet(id: number, code: string){
         data: {code}
     });   // Updating the snippet of specfifc id with given data
 
+    revalidatePath(`/snippets/${id}`);  
     redirect(`/snippets/${id}`);   // Redirecting back to snippets page.
-
 }
 
 export async function deleteSnippet(id: number){
     await db.snippet.delete({
         where: {id}
     });
-
+    
+    revalidatePath('/');
     redirect(`/`);
 }
-
-// NOTES (SEC 4):
+ 
+// NOTES (SEC 4 + 5):
 // We cannot use server actions inside of client components directly.
 // There are two ways of using server actions inside of client components.
 // 1. Passing the server action as props from a server component.
